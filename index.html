@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Khushboo Beauty Parlour</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#fdeff9,#ec38bc,#7303c0);
+  color:#333;
+}
+
+header{
+  text-align:center;
+  padding:40px 20px;
+  color:white;
+}
+
+header h1{
+  font-size:2.5em;
+  margin-bottom:10px;
+}
+
+header p{
+  font-size:1.1em;
+  opacity:0.9;
+}
+
+.container{
+  max-width:500px;
+  background:white;
+  margin:20px auto;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+.container h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#7303c0;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:15px;
+}
+
+textarea{
+  resize:none;
+  height:80px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  background:linear-gradient(135deg,#ec38bc,#7303c0);
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
+}
+
+.share-box{
+  margin-top:25px;
+  text-align:center;
+}
+
+.share-box button{
+  margin-top:10px;
+}
+
+.qr{
+  margin-top:20px;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  color:white;
+  padding:15px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Welcome to Khushboo Beauty Parlour</h1>
+  <p>Luxury Care • Professional Staff • Beautiful You ✨</p>
+</header>
+
+<div class="container">
+  <h2>Online Seat Booking</h2>
+
+  <select id="parlour">
+    <option value="">Select Parlour</option>
+    <option value="Parlour 1 - Near GPS Science Academy">
+      Parlour 1 - Near GPS Science Academy
+    </option>
+    <option value="Parlour 2 - Near Nagar Palika">
+      Parlour 2 - Near Nagar Palika
+    </option>
+  </select>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="tel" id="mobile" placeholder="Mobile Number">
+  <input type="date" id="date">
+  <input type="time" id="time">
+
+  <textarea id="requirement" placeholder="What service do you want? (Bridal, Facial, Hair, etc.)"></textarea>
+
+  <button onclick="sendWhatsApp()">Book Appointment</button>
+
+  <div class="share-box">
+    <button onclick="copyLink()">Copy Website Link</button>
+    <button onclick="shareWhatsApp()">Share on WhatsApp</button>
+  </div>
+
+  <div class="qr">
+    <p><b>Scan QR Code</b></p>
+    <img id="qrImage" width="180">
+  </div>
+</div>
+
+<footer>
+  © 2026 Khushboo Beauty Parlour | All Rights Reserved
+</footer>
+
+<script>
+const websiteURL = window.location.href;
+document.getElementById("qrImage").src =
+"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + websiteURL;
+
+function sendWhatsApp(){
+  let parlour = document.getElementById("parlour").value;
+  let name = document.getElementById("name").value;
+  let mobile = document.getElementById("mobile").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+  let req = document.getElementById("requirement").value;
+
+  if(!parlour || !name || !mobile || !date || !time){
+    alert("Please fill all required fields");
+    return;
+  }
+
+  let message =
+  "🌸 *Khushboo Beauty Parlour Booking* 🌸%0A%0A" +
+  "*Parlour:* " + parlour + "%0A" +
+  "*Name:* " + name + "%0A" +
+  "*Mobile:* " + mobile + "%0A" +
+  "*Date:* " + date + "%0A" +
+  "*Time:* " + time + "%0A" +
+  "*Requirement:* " + req;
+
+  let whatsappURL =
+  "https://wa.me/918740098048?text=" + message;
+
+  window.open(whatsappURL,"_blank");
+}
+
+function copyLink(){
+  navigator.clipboard.writeText(websiteURL);
+  alert("Website link copied!");
+}
+
+function shareWhatsApp(){
+  let msg = "Check out Khushboo Beauty Parlour Website 💄✨%0A" + websiteURL;
+  window.open("https://wa.me/?text=" + msg,"_blank");
+}
+</script>
+
+</body>
+</html>
+
+
+
